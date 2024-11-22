@@ -1,0 +1,59 @@
+### Requerimientos del Proyecto
+1. **Registro e inicio de sesión de usuario**
+   - Endpoint de **registro** de usuario.
+   - Endpoint de **inicio de sesión** con generación de un token JWT.
+
+2. **Gestión de contactos**
+   - **Crear un nuevo contacto**: cada contacto debe incluir nombre, teléfono, email, dirección y notas adicionales.
+   - **Listar los contactos**: obtener todos los contactos del usuario autenticado.
+   - **Buscar un contacto**: permitir la búsqueda por nombre o teléfono.
+   - **Actualizar un contacto**: actualizar la información de un contacto específico.
+   - **Eliminar un contacto**.
+
+3. **Autenticación y autorización con JWT**
+   - Validar el JWT en las rutas de contactos para asegurar que solo el usuario autenticado pueda acceder a sus contactos.
+   - Implementar un middleware para restringir el acceso a los contactos de cada usuario.
+
+4. **Extra: Categorías para contactos**
+   - Agregar categorías opcionales (ej. "Familia", "Trabajo", "Amigos") para que el usuario pueda clasificar sus contactos.
+
+### Tecnologías
+
+- **Flask** y **Flask-RESTful** (opcional): Para crear la API.
+- **Flask-SQLAlchemy**: Para el ORM y manejo de la base de datos.
+- **JWT**: Para autenticar y autorizar las peticiones de usuario.
+- **SQLite**: Como base de datos para almacenar usuarios y contactos.
+
+### Estructura Básica de Archivos
+
+```
+contact_manager/
+│
+├── app.py              # Archivo principal de la aplicación
+├── config.py           # Configuración de la aplicación y base de datos
+├── models.py           # Modelos User y Contact
+├── routes.py           # Rutas y lógica de los endpoints
+├── auth.py             # Lógica de generación y validación de JWT
+├── schemas.py          # Esquemas para validar entradas (opcional con Marshmallow)
+└── requirements.txt    # Dependencias
+```
+
+### Modelo de Base de Datos
+
+- **User**: ID, nombre de usuario, email, contraseña.
+- **Contact**: ID, nombre, teléfono, email, dirección, notas, categoría, `user_id` (para relación con el usuario propietario).
+
+### Funcionalidad Básica
+
+1. **models.py**: Define los modelos `User` y `Contact` en Flask-SQLAlchemy.
+2. **auth.py**: Lógica para crear y verificar JWT, protegiendo las rutas de contactos.
+3. **routes.py**: 
+   - CRUD para contactos.
+   - Buscar contactos por criterios (nombre o teléfono).
+4. **schemas.py**: Valida los datos con `marshmallow` o `flask-marshmallow` (esto es para ver tu habilidad en implementar algo que no conoces).
+
+### Extras
+
+- **Paginación**: para facilitar la gestión de contactos cuando la lista es extensa.
+- **Filtros avanzados**: agregar más opciones de filtro, como categorías o rango de creación.
+- **Documentación con Swagger o Postman**: para documentar y probar la API.
